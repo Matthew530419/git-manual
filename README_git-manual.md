@@ -11,6 +11,7 @@
   ![workflow](./img/checkout.png)
 
 - Commit include hash code based on snapshot information and this help we could reference version. move file from staging area to .git directory with saving history
+
 - Git could upload on remote storage
   ![workflow](./img/push.png)
 
