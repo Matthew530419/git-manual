@@ -1,21 +1,26 @@
 ###1. Git concept
 
 - Git is not only Version Control System(VCS) but also Distributed Version Control(DVC)
+
   ![concept](./img/concept.png)
   ![concept](./img/concept1.png)
 
 - Git workflow could be devided below
+
   ![workflow](./img/workflow.png)
 
 - Git could restore file from commit to untracked on working directory.
+
   ![workflow](./img/checkout.png)
 
 - Commit include hash code based on snapshot information and this help we could reference version. move file from staging area to .git directory with saving history
 
 - Git could upload on remote storage
+
   ![workflow](./img/push.png)
 
 - Git could download from remote storage
+
   ![workflow](./img/pull.png)
 
 ###2. Why use Git
@@ -70,15 +75,20 @@
 - `git rm --cached <file>`: moving file from staging area to untracked on working directory
 - `start .git`: open folder of named ".git" on window OS. If Mac OS, use `open .git`
 - `git diff`: Compare with before and after on working directory. before means file on staging area "new file: " and after means file on tracked on working directory "modified: "
+
   ![diff](./img/diff.png)
+
   `--- a/a.txt` means before file condition
   `+++ b/a.txt` means after file condition
   `@@ -1 hellow world!` means look before file first line and check written down hellow world!
   `+1, 2 @@ +hi` means add another line and check written down hi, and then, total lines become 2 lines. +hi is green color because of adding
   If you diff file on staging area, use `git diff --staged` same ad `git diff --cached`
+
   ![diff](./img/diff1.png)
+
   `--- /dev/null` means no file before
   `git diff <hashcode1> <hashcode2>`: Compare and display only modified contents between hashcode1 and hashcode2. Hashcode1 means before and hashcode2 means after. If you use hashcodes in opposit sequence, you can see '-' with red color, instead of '+' with green color
+
 - `cat a.txt`: All sentences in a.txt are displayed on terminal
 - `git rm <file>`: File will be deleted and changes will be updated on staging area(committed). If you use `rm <file>`,changes will be updated on workingdirectory(not committed)
 - `git mv <file>`: File will be renamed and changes will be updated on staging area. If you use `mv <file>`,changes will be updated on workingdirectory
@@ -90,6 +100,7 @@
 - Main or Master: These branches are used when verified functions and production level
 - Feature-A/B/C: These branches are used when developing new functions. If you finish to veryfied with relative department, feaure-A/B/C could be merged into main or master.
 - Head: Pointing to up-to-date commit and the tip of current branch
+
   ![branch](./img/branch-concept.png)
 
 2. git commands
@@ -122,19 +133,27 @@
 
 - Conflict could appear when same file exist on more than 2 branches and then merge among with those branches
 - Resolve conflict manually
+
   ![conflict](./img/conflict.png)
+
   conflict between modified HEAD and modified <name>. If you use HEAD, delete contents below ====. If you use <name>, delete contents above ====. If you use both, delte <<<HEAD and >>> <name> without sentences.
+
 - Resolve conflict with VS Code
   Use `git config --global -e` and set up the merge as the diff
+
   ![conflict](./img/gitconfig.png)
   ![conflict](./img/mergetool.png)
+
   modified <name> file and <name>.orig appear after the merge. If you do not want to show <name>.orig, use `git config --global mergetool.keepBackup false`. Use `git merge --abort` to go back before the change, and then, `git clean -fd` to delete <name>.orig. you cannot show <name>.orig when try in sequence once again. Use `git merge --continue` to finish the merge
+
 - If commit MSG file on terminal appear when using `git merge --continue` code, please type `:wq`, and then, you can exit the file
+
   ![conflict](./img/commit-message.png)
 
 ###1. Normal opration
 
 - `renamed:` means `git rm <filename>` and `git add <changed filename>`
+
   ![rename](./img/rename.png)
 
 ###2. failures
