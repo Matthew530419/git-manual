@@ -79,14 +79,19 @@
   ![diff](./img/diff.png)
 
   `--- a/a.txt` means before file condition
+
   `+++ b/a.txt` means after file condition
+
   `@@ -1 hellow world!` means look before file first line and check written down hellow world!
+
   `+1, 2 @@ +hi` means add another line and check written down hi, and then, total lines become 2 lines. +hi is green color because of adding
+
   If you diff file on staging area, use `git diff --staged` same ad `git diff --cached`
 
   ![diff](./img/diff1.png)
 
   `--- /dev/null` means no file before
+
   `git diff <hashcode1> <hashcode2>`: Compare and display only modified contents between hashcode1 and hashcode2. Hashcode1 means before and hashcode2 means after. If you use hashcodes in opposit sequence, you can see '-' with red color, instead of '+' with green color
 
 - `cat a.txt`: All sentences in a.txt are displayed on terminal
