@@ -9,7 +9,7 @@
 
   ![workflow](./img/workflow.png)
 
-- Git could restore file from commit to untracked on working directory.
+- Git could restore file from commit to untracked on working directory
 
   ![workflow](./img/checkout.png)
 
@@ -130,9 +130,10 @@
 
 - Fast forward(ff) merges: Merge simply after HEAD(pointer) move to what branch you want to merge, using `git merge <name>`. However, there isn't any record of history about the merge. It seems to be committing continuously using one branch by one developer
 - Option no-ff merges: Use `git merge --no-ff <name>` if you want to record of the merge, and then, Please delete branch named "<name>" after finished the merge
-- Three way merges: Auto-merge with record as no-ff even though other commit exist, not between branches that you want to merge. Use `git merge <name>`
-- Rebase: In case of three way merges pre-conditions, if you want ff merges, Use . However, If you cooperate with other developer on same branch, path would be different, so there would be conflict when the merge. Do not rebase in case of uploaded history on server. commonly use when the commit on local
+- Three way merges: Auto-merge with record as no-ff even though other commit exist, not between branches that you want to merge. Use `git merge <name>`, Please delete branch named "<name>" after finished the merge
 - `git merge <name>`: Merge branch named "<name>" into main or master branch concisely. Please delete branch named "<name>" after finished the merge, using `git branch -d <name>`
+- Rebase: In case of three way merges pre-conditions, if you want ff merges, Use rebase. However, If you cooperate with other developer on same branch, pointer would be different when he merge, there would be a high possibility of conflict. Do not rebase in case of uploaded history on server. commonly use when the commit on local. You can find details on 5 subject
+- Cherrypick: Use cherrypick if you need a commit about the function using hashcode. First, the commit on certain sub branch would be copied, pasted and merged on not only main branch but also other sub branch with other hashcode. It's also very useful. You can find details on 6 subject
 
 4. Conflict
 
@@ -154,6 +155,28 @@
 - If commit MSG file on terminal appear when using `git merge --continue` code, please type `:wq`, and then, you can exit the file
 
   ![conflict](./img/commit-message.png)
+
+- Resolve conflict with P4Merge
+
+5. Rebase
+
+- Rebase enable three way merges to be fast forward merges
+- Rebase is to save commits of <name2> branch on temp container and change HEAD to <name1> branch and move and merge the commits on there
+- If you develop same project with other developer, please execute carefully and it's possible to conflict because of difference between pointer when he start to develop and pointer when he merge sub branch to main branch
+- `git rebase <name>`: If ff merges is not possible and you don't want to record history about three way merges, please use this code on subbranch that you want to move commits to main branch. I think this code is effective when only one sub branch chained to main branch
+
+  ![rebase](./img/rebase.png)
+
+- `git rebase --onto <name1> <name2>`: It's really useful when many sub branches are chained and continue to be listed in parallel. If you change the base and merge commits on sub sub branch into main branch without history, please use this code. <name1> means main or master branch and <name2> means format: sub branch sub sub branch. for example, `git rebase --onto master profile profile-ui`. profile-ui chained to profile and profile chained to main branch
+
+  ![rebase](./img/rebase--onto.png)
+
+6. Cherry-pick
+
+- Cherry-pick enable a commit to be pasted and merged on main branch. If you need one of functions urgently, it's very useful
+- `git ccherry-pick <hashcode>`: Add the one on main branch with creating a new hashcode after one of commits in hashcode was copied on sub branch
+
+  ![cherry-pick](./img/cherry-pick.png)
 
 ###1. Normal opration
 
