@@ -71,6 +71,8 @@
   `echo build/*.log > .gitignore`: ignore all files with ".log" extension on "build" subdirectory.
 - `git add <file>`: moving file from untracked on working directory to staging area. `git add *` or `git add .` means all file move.
 - `git commit -m "message"`: The file would be commited with message and hashcode.
+- `git commit --amend -m "message1"`: Commit message would be changed to message1 with same hashcode. It's possible on not connection with server.
+- `git commit --amend`: If you fix only sentences in file keeping commit message, use this code after applying changes to staging area. It's possible on not connection with server.
 - `git rm --cached <file>`: moving file from staging area to untracked on working directory.
 - `start .git`: open folder of named ".git" on window OS. If Mac OS, use `open .git`.
 - `git clean -fd`: Remove untracked files on working directory.
@@ -97,6 +99,17 @@
 - `cat a.txt`: All sentences in a.txt are displayed on terminal
 - `git rm <file>`: File will be deleted and changes will be updated on staging area(committed). If you use `rm <file>`,changes will be updated on workingdirectory(not committed).
 - `git mv <file>`: File will be renamed and changes will be updated on staging area. If you use `mv <file>`,changes will be updated on workingdirectory.
+- `git restore <file>.<extension>`: Restore changers of tracked files on working directory. If you restore all changes, use `git restore .`. Please use this code instead of `git checkout <name>`after git version "2.23", because command `git checkout` implies many command meaning and users are confused. This is the one of breaking down many command meaning `git checkout`.
+- `git restore --staged <file>.<extension>`: Restore changers of the file on staging area to on working directory. If you restore all changes, use `git restore --staged .`
+- `git restore --staged <file>.<extension>`: Restore changers of files on staging area to working directory. If you restore all changes, use `git restore --staged .`.
+- `git restore --source=<hashcode> <file>.<extension>` or `git restore --source=HEAD~<num> <file>.<extension>`: Restore changers of files to the commit with the hashcode or HEAD~<num>.
+- `git reset --mixed <hashcode>` or `git reset --mixed HEAD~<num>`:Reset commits from HEAD to right before numbering or from HEAD to right before hashcode. The changers due to resetting would be applied to working directory. If you use `git reset <hasecode>` or `git reset HEAD~<num>`, you will get same output.
+- `git reset --soft <hashcode>` or `git reset --soft HEAD~<num>`: :Reset commits from HEAD to right before numbering or from HEAD to right before hashcode. The changers due to resetting would be applied to staging area.
+- `git reset --hard HEAD`: Reset completely all tracked files no matter where working directory or staging area.
+- `git reset --hard <hashcode>` or `git reset --hard HEAD~<num>`: Reset completely commits from HEAD to right before numbering or from HEAD to right before hashcode. If you restore your fault that come from commits disappear, use `git reset --hard <hashcode>`. The hashcode means right before fault of reset. It would be better to find the hashcode if you use `git reflog`.
+- `git reflog`: Check all logs with explanation of status on hashcode with HEAD ID.
+- `git revert <hashcode>`: If you want to revert committed files to the original one and the commits connected with server, use this code. This is more safety than `git restore` and `git reset` because this make additional commit log with message and don't change log as them.
+- `git revert --no-commit <hashcode>`: If there is a conflict when revert function, use this code, fix the conflict manually and commit. Please just fix and commit about revert without other changers.
 
 ####4. Inspection and Finding histories
 
@@ -140,7 +153,7 @@
 
 - `git branch`: Check local branches. If depository is connected with remote server, Use `git branch --all`
 - `git branch <name>`: Creat new branch named "<name>"
-- `git switch <name>`: Move to branch named "<name>"
+- `git switch <name>`: Move to branch named "<name>". Please use this code instead of `git checkout <name>`after git version "2.23", because command `git checkout` implies many command meaning and users are confused. This is the one of breaking down many command meaning `git checkout`.
 - `git siwtch -C <name>`: Creat new branch named "<name>" and move to there. It is similar to `git checkout -b <name>`
 - `git checkout <hashcode>`: move to the certain commit version. If you move to the certain branch, use `git checkout <name>`. It is similar to `git switch <name>`
 - `git branch -v`: Check up-to-date commit per branch
@@ -173,14 +186,13 @@
   conflict between modified HEAD and modified <name>. If you use HEAD, delete contents below ====. If you use <name>, delete contents above ====. If you use both, delte <<<HEAD and >>> <name> without sentences.
 
 - Resolve conflict with VS Code
-  Use `git config --global -e` and set up the merge as the diff
+  Use `git config --global -e` and set up the merge as the difftool.
 
-  ![conflict](./img/gitconfig.png)
   ![conflict](./img/mergetool.png)
 
   modified <name> file and <name>.orig appear after the merge. If you do not want to show <name>.orig, use `git config --global mergetool.keepBackup false`. Use `git merge --abort` to go back before the change, and then, `git clean -fd` to delete <name>.orig. you cannot show <name>.orig when try in sequence once again. Use `git merge --continue` to finish the merge.
 
-- If commit MSG file on terminal appear when using `git merge --continue` code, please type `:wq`, and then, you can exit the file.
+- If commit MSG file on terminal appear when using `git merge --continue` code and not connectied with VS Code, please type `:wq`, and then, you can exit the file.
 
   ![conflict](./img/commit-message.png)
 
@@ -250,3 +262,12 @@
 
 - symptom: `error: invalid option: --h` when `git diff -h`.
   I think this is also not command format. command format is different per function according setting. For example, function of diff is only possible `git diff --h`, on the other hand, functions of not only git status but also git config is possible in case of both.
+
+- symptom : `remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.`
+  `remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.`
+  `fatal: unable to access 'https://github.com/Matthew530419/git-manual.git/': The requested URL returned error: 403`
+  This come from expired authentication.
+  countermeasure: get personal access token from developer setting from github. Edit password to personal access token on credential manager of windows settings, and then, type `git push` on terminal.
+
+- symptom: `warning: LF will be replaced by CRLF in about.txt. the file will have its original line endings in your working directory.` when `git stash push -m "message" was used at first time.`
+  I think windows OS need CRLF, the CRLF applied to at that time, so I haven't seen this warning anymore.
