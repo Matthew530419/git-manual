@@ -71,7 +71,7 @@
   `echo build/*.log > .gitignore`: ignore all files with ".log" extension on "build" subdirectory.
 - `git add <file>`: moving file from untracked on working directory to staging area. `git add *` or `git add .` means all file move.
 - `git commit -m "message"`: The file would be commited with message and hashcode.
-- `git commit --amend -m "message1"`: Commit message would be changed to message1 with same hashcode. It's possible on not connection with server.
+- `git commit --amend -m "message1"`: Commit message would be changed to message1 of up-to-date hashcode. It's possible on not connection with server.
 - `git commit --amend`: If you fix only sentences in file keeping commit message, use this code after applying changes to staging area. It's possible on not connection with server.
 - `git rm --cached <file>`: moving file from staging area to untracked on working directory.
 - `start .git`: open folder of named ".git" on window OS. If Mac OS, use `open .git`.
@@ -211,6 +211,8 @@
 
   ![rebase](./img/rebase--onto.png)
 
+- `git rebase -i <hashcode>`: If you change commit message for hashcode, not the latest commit message, use this code(interactive rebasing) and use hashcode right before, not the hashcode you want to change. Please type r or reword command on git-rebase-todo and save, and then, type what you want on COMMIT-EDITMSG and save.
+
 #####5-5. Cherry-pick
 
 - Cherry-pick enable a commit to be pasted and merged on main branch. If you need one of functions urgently, it's very useful.
@@ -241,16 +243,25 @@
 - `git stash show ID -p`: Check the file having changes in more detail as much as `git diff`.
 - `git stash branch <name>`: Move the latest file from stash stack to working directory creating new branch named <name>, and then, remove the latest ID on stash stack.
 
-###1. Normal opration
+####6. Methods of updating commit of log in local
 
-- `renamed:` means `git rm <filename>` and `git add <changed filename>`
+#####6-1. Dividing a huge commit in several commits
 
-  ![rename](./img/rename.png)
+- First, use `git rebase -i <hashcode>` or `git rebase HEAD~<num>` on right before <hashcode> or right before HEAD~<num>, and then, type `edit` command on git-rebase-todo and save.
+- Second, use `git reset --mixed <hashcode>` or `git reset HEAD~<num>` on right before <hashcode> or right before HEAD~<num>, and then, git add <file1> and git commit with <message1>, git add <file2> and git commit with <message2>. Please check whether the logs are properly configured on tree or not.
+- Finally, use `git rebase --continue`. You can find that 2 distributed commits are at the place where the huge commit are originally located.
 
-###2. failures
+#####6-2. Removal of commits
 
-- symptom: Image file cannot be recognized when git status.
-  Local image file was connected with Github. The file was in subdirectory named "img". The name of file was changed on local, and then, git didn't recognized with this file and display deleted: when `git status`. This file disappear after git add. There is the file on local directory, but I cannot find the file anywhere when git status. However, I found how to recognize this. That was moving this file to root directory. I don't know the which conditions git cannot recognize file on `untracked files:` of git status.
+- Use `git rebase -i <hashcode>` or `git rebase -i HEAD~<num>` on right before <hashcode> or right before HEAD~<num>, and then, type `drop` command on git-rebase-todo and save.
+  If you have conflict because shared same file with 2 commits, Please fix the error and use `git rebase --continue`.
+
+#####6-3. Combination of commits
+
+- First, use `git rebase -i <hashcode>` or `git rebase -i HEAD~<num>` on right before <hashcode> or right before HEAD~<num>, and then, type `pick` command on first commit and type `squash` command on the others in git-rebase-todo and save.
+- Second, type commit meassage on the commit which is typical of several commits and save on COMMIT_EDITMSG. You can find a typical commit combined several commits.
+
+####7. Resolution of failures
 
 - symptom: `Command syntax is invalid` appear when `git log --graph --all --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) |`.
   I think this is over memoryblock apostrophe can use. The memoryblock could save oneline string, but other memoryblock of apostrophe is needed when add `|` or `space`.
@@ -271,3 +282,10 @@
 
 - symptom: `warning: LF will be replaced by CRLF in about.txt. the file will have its original line endings in your working directory.` when `git stash push -m "message" was used at first time.`
   I think windows OS need CRLF, the CRLF applied to at that time, so I haven't seen this warning anymore.
+
+- symptom: `error: could not apply 0e4934b... Add payment-ui` when `git rebase -i e94152f`
+  I think same file was used on e94152f and 0e4934b and conflict occurred when deleted e94152f on git-rebase-todo.
+  countermeasure: fix all conflict manually and `git add` or `git rm`, and then, `git rebase --continue`
+
+- symptom: Image file cannot be recognized when git status.
+  Local image file was connected with Github. The file was in subdirectory named "img". The name of file was changed on local, and then, git didn't recognized with this file and display deleted: when `git status`. This file disappear after git add. There is the file on local directory, but I cannot find the file anywhere when git status. However, I found how to recognize this. That was moving this file to root directory. I don't know the which conditions git cannot recognize file on `untracked files:` of git status.
