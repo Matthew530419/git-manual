@@ -2,29 +2,27 @@
 
 - Git is not only Version Control System(VCS) but also Distributed Version Control(DVC)
 
-  <img src="./img/concept.png" width="600" height="350">\n
+  <img src="./img/concept.png" width="700" height="400">
 
-  <img src="./img/concept1.png" width="100" height="100">
+  <img src="./img/concept1.png" width="700" height="400">
 
 - Git workflow could be devided below
 
-  <img src="./img/workflow.png" width="100" height="100">
-
-  ![workflow](./img/workflow.png)
+  <img src="./img/workflow.png" width="700" height="400">
 
 - Git could restore file from commit to untracked on working directory
 
-  <img src="./img/checkout.png" width="100" height="100">
+  <img src="./img/checkout.png" width="700" height="400">
 
 - Commit include hash code based on snapshot information and this help we could reference version. move file from staging area to .git directory with saving history
 
 - Git could upload on remote storage
 
-  <img src="./img/push.png" width="100" height="100">
+  <img src="./img/push.png" width="700" height="400">
 
 - Git could download from remote storage
 
-  <img src="./img/pull.png" width="100" height="100">
+  <img src="./img/pull.png" width="700" height="400">
 
 ###2. Why use Git
 
@@ -81,7 +79,7 @@
 - `git clean -fd`: Remove untracked files on working directory.
 - `git diff`: Compare with before and after on working directory. before means file on staging area "new file: " and after means file on tracked on working directory "modified: "
 
-  <img src="./img/diff.png" width="100" height="100">
+  <img src="./img/diff.png" width="700" height="400">
 
   `--- a/a.txt` means before file condition
 
@@ -93,7 +91,7 @@
 
   If you diff file on staging area, use `git diff --staged` same ad `git diff --cached`
 
-  <img src="./img/diff1.png" width="100" height="100">
+  <img src="./img/diff1.png" width="700" height="400">
 
   `--- /dev/null` means no file before
 
@@ -150,7 +148,7 @@
 - Feature-A/B/C: These branches are used when developing new functions. If you finish to veryfied with relative department, feaure-A/B/C could be merged into main or master.
 - Head: Pointing to up-to-date commit and the tip of current branch
 
-  <img src="./img/branch-concept.png" width="100" height="100">
+  <img src="./img/branch-concept.png" width="700" height="400">
 
 5-1-2. git commands
 
@@ -184,20 +182,20 @@
 - Conflict could appear when same file exist on more than 2 branches and then merge among with those branches.
 - Resolve conflict manually
 
-  ![conflict](./img/conflict.png)
+  <img src="./img/conflict.png" width="700" height="400">
 
   conflict between modified HEAD and modified <name>. If you use HEAD, delete contents below ====. If you use <name>, delete contents above ====. If you use both, delte <<<HEAD and >>> <name> without sentences.
 
 - Resolve conflict with VS Code
   Use `git config --global -e` and set up the merge as the difftool.
 
-  ![conflict](./img/mergetool.png)
+  <img src="./img/mergetool.png" width="700" height="400">
 
   modified <name> file and <name>.orig appear after the merge. If you do not want to show <name>.orig, use `git config --global mergetool.keepBackup false`. Use `git merge --abort` to go back before the change, and then, `git clean -fd` to delete <name>.orig. you cannot show <name>.orig when try in sequence once again. Use `git merge --continue` to finish the merge.
 
 - If commit MSG file on terminal appear when using `git merge --continue` code and not connectied with VS Code, please type `:wq`, and then, you can exit the file.
 
-  ![conflict](./img/commit-message.png)
+  <img src="./img/commit-message.png" width="700" height="400">
 
 #####5-4. Rebase
 
@@ -206,11 +204,11 @@
 - If you develop same project with other developer, please execute carefully and it's possible to conflict because of difference between pointer when he start to develop and pointer when he merge sub branch to main branch.
 - `git rebase <name>`: If ff merges is not possible and you don't want to record history about three way merges, please use this code on subbranch that you want to move commits to main branch. I think this code is effective when only one sub branch chained to main branch.
 
-  ![rebase](./img/rebase.png)
+  <img src="./img/rebase.png" width="700" height="400">
 
 - `git rebase --onto <name1> <name2>`: It's really useful when many sub branches are chained and continue to be listed in parallel. If you change the base and merge commits on sub sub branch into main branch without history, please use this code. <name1> means main or master branch and <name2> means format: sub branch sub sub branch. for example, `git rebase --onto master profile profile-ui`. profile-ui chained to profile and profile chained to main branch.
 
-  ![rebase](./img/rebase--onto.png)
+  <img src="./img/rebase--onto.png" width="700" height="400">
 
 - `git rebase -i <hashcode>`: If you change commit message for hashcode, not the latest commit message, use this code(interactive rebasing) and use hashcode right before, not the hashcode you want to change. Please type r or reword command on git-rebase-todo and save, and then, type what you want on COMMIT-EDITMSG and save.
 
@@ -219,7 +217,7 @@
 - Cherry-pick enable a commit to be pasted and merged on main branch. If you need one of functions urgently, it's very useful.
 - `git ccherry-pick <hashcode>`: Add the one on main branch with creating a new hashcode after one of commits in hashcode was copied on sub branch.
 
-  ![cherry-pick](./img/cherry-pick.png)
+  <img src="./img/cherry-pick.png" width="700" height="400">
 
 #####5-6. Stash
 
@@ -228,7 +226,7 @@
   - You want to save the try bug fix files for a while. You don't like the files to execute commit again and You just want to refer for solution of bug fix.
 - Temp changes could be stashed and popped between stash stack and working directory.
 
-  ![stash](./img/stash.png)
+  <img src="./img/stash.png" width="700" height="400">
 
 - `git stash`: Stash tracked file to stash stack
 - `git stash push -m "message"`: Stash tracked file to stash stack with message
