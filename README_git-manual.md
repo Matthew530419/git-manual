@@ -2,7 +2,7 @@
 
 - Git is not only Version Control System(VCS) but also Distributed Version Control(DVC)
 
-  <img src="./img/concept.png" width="100" height="100">
+  <img src="./img/concept.png" width="600" height="350">\n
 
   <img src="./img/concept1.png" width="100" height="100">
 
