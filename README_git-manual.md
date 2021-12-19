@@ -2,26 +2,29 @@
 
 - Git is not only Version Control System(VCS) but also Distributed Version Control(DVC)
 
-  ![concept](./img/concept.png)
-  ![concept](./img/concept1.png)
+  <img src="./img/concept.png" width="100" height="100">
+
+  <img src="./img/concept1.png" width="100" height="100">
 
 - Git workflow could be devided below
+
+  <img src="./img/workflow.png" width="100" height="100">
 
   ![workflow](./img/workflow.png)
 
 - Git could restore file from commit to untracked on working directory
 
-  ![workflow](./img/checkout.png)
+  <img src="./img/checkout.png" width="100" height="100">
 
 - Commit include hash code based on snapshot information and this help we could reference version. move file from staging area to .git directory with saving history
 
 - Git could upload on remote storage
 
-  ![workflow](./img/push.png)
+  <img src="./img/push.png" width="100" height="100">
 
 - Git could download from remote storage
 
-  ![workflow](./img/pull.png)
+  <img src="./img/pull.png" width="100" height="100">
 
 ###2. Why use Git
 
@@ -78,7 +81,7 @@
 - `git clean -fd`: Remove untracked files on working directory.
 - `git diff`: Compare with before and after on working directory. before means file on staging area "new file: " and after means file on tracked on working directory "modified: "
 
-  ![diff](./img/diff.png)
+  <img src="./img/diff.png" width="100" height="100">
 
   `--- a/a.txt` means before file condition
 
@@ -90,7 +93,7 @@
 
   If you diff file on staging area, use `git diff --staged` same ad `git diff --cached`
 
-  ![diff](./img/diff1.png)
+  <img src="./img/diff1.png" width="100" height="100">
 
   `--- /dev/null` means no file before
 
@@ -147,7 +150,7 @@
 - Feature-A/B/C: These branches are used when developing new functions. If you finish to veryfied with relative department, feaure-A/B/C could be merged into main or master.
 - Head: Pointing to up-to-date commit and the tip of current branch
 
-  ![branch](./img/branch-concept.png)
+  <img src="./img/branch-concept.png" width="100" height="100">
 
 5-1-2. git commands
 
@@ -195,8 +198,6 @@
 - If commit MSG file on terminal appear when using `git merge --continue` code and not connectied with VS Code, please type `:wq`, and then, you can exit the file.
 
   ![conflict](./img/commit-message.png)
-
-- Resolve conflict with P4Merge
 
 #####5-4. Rebase
 
