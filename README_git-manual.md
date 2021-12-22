@@ -44,7 +44,7 @@
 - `git config --list`: Show user all setting list.
 - `q`: exit and come back to terminal.
 - `git config --global core.editor "code"`: Setting with cmd configuration starting with vscode. no matter what exit vscode.
-- `git config --global core.editor "code --wait"`: Setting with cmd configuration starting with vscode. However, we can not use terminal configuration until exting vscode.
+- `git config --global core.editor "code --wait"`: Setting with cmd configuration starting with vscode. However, we can not use terminal configuration until exiting vscode.
 - `git config --global -e`: Edit setting with vscode.
 - `code .`: Connection with vscode.
 - `git config --global user.name "Matthew530419"`: Setting user information for name.
@@ -69,14 +69,14 @@
 - `git status --h`: Check help means command and option regarding status.
 - `git status --s`: Show status concisely
 - `git diff -h`: Check help means command and option regarding diff.
-- `echo <sentences> > <file>.<extension>`: Add `<file>.<extension>` with `<sentences>` on untracked condition. If you update changers, use `echo <sentence> >> <file>.<extension>`.
+- `echo <content> > <file>.<extension>`: Add `<file>.<extension>` with `<content>` on untracked condition. If you update changers, use `echo <content> >> <file>.<extension>`.
 - `echo *.log > .gitignore`: ignore all files with ".log" extension.
   `echo build/*.log > .gitignore`: ignore all files with ".log" extension on "build" directory.
 - `git add <file>`: moving file from untracked on working directory to staging area. `git add *` or `git add .` means all file move to staging area.
-- `git commit -m "message"`: The file would be commited with message and hashcode.
+- `git commit -m "message"`: The file in staging area would be commited with message and hashcode would be created.
 - `git commit -am "message"`: All files in directory would be committed with message and hashcode would also be created no matter where working directory or staging area.
 - `git commit --amend -m "message1"`: Latest commit message would be changed to message1 and hashcode would be changed. It's possible on not connection with server.
-- `git commit --amend`: If you fix only sentences or comments in some of files keeping commit message, use this code after applying changes to staging area. It's possible on not connection with server.
+- `git commit --amend`: If you fix only sentences or comments in some of files keeping commit message, use this code after applying changes to staging area. Number of hash code would be changed. It's possible on condition that is not connection with server.
 - `git rm --cached <file>`: moving file from staging area to untracked on working directory.
 - `start .git`: open folder of named ".git" on window OS. If Mac OS, use `open .git`.
 - `git clean -fd`: Remove untracked files on working directory.
@@ -226,25 +226,25 @@
 ##### 5-6. Stash
 
 - It's really useful on the conditions below.
-  - You are suddenly assinged urgent work when you are coding something else on working directory. You don't like the files to execute commit and want to work after completed urgent work.
-  - You want to save the try bug fix files for a while. You don't like the files to execute commit again and You just want to refer for solution of bug fix.
-- Temp changes could be stashed and popped between stash stack and working directory.
+  - You are suddenly assinged urgent work when you are already working on other coding on working directory and you'd like to save the coding temporarily until you finish urgent work. You don't like the files to execute commit.
+  - Your first try could not solve fault. In case of your another try, you want to save and refer first tried bug fix files temporarily. You don't like the files to execute commit again and You just want to refer for other solution of bug fix.
+- Temporary changes could be stashed and popped between stash stack and working directory.
 
   <img src="./img/stash.png" width="700" height="400">
 
-- `git stash`: Stash tracked file to stash stack
-- `git stash push -m "message"`: Stash tracked file to stash stack with message
-- `git stash push -m "message" --keep-index`: Stash tracked files to stash stack keeping the file on staging area
-- `git stash -u`: Stash files to stash stack no matter what is tracked file or untracked file
+- `git stash`: Stash tracked file to stash stack without title. `git stash` is as same as `git stash push`.
+- `git stash push -m "message"`: Stash tracked file to stash stack with message.
+- `git stash push -m "message" --keep-index`: Stash tracked files to stash stack keeping the file on staging area.
+- `git stash -u`: Stash files to stash stack no matter what is tracked file or untracked file. `-u` option means untracking.
 - `git stash list`: Check stashed list. Getting higher, newer, getting lower, older.
 - `git stash drop ID(stash@{num})`: Delete stash of ID on stash stack.
 - `git stash clear`: Delete all stashes on stash stack.
 - `git stash pop`: Move the latest file from stash stack to working directory, and then, remove the latest ID on stash stack.
-- `git stash apply`: Move the latest file from stash stack to working directory, but, stash steal have stash`s ID list.
-- `git stash apply ID`: Move the file of ID from stash stack to working directory, but, stash steal have stash`s ID list.
+- `git stash apply`: Move the latest file from stash stack to working directory, but, stash still has stash`s ID list.
+- `git stash apply ID`: Move the file of ID from stash stack to working directory, but, stash still has stash`s ID list.
 - `git stash show ID`: Check the file having changes on ID briefly.
 - `git stash show ID -p`: Check the file having changes in more detail as much as `git diff`.
-- `git stash branch <name>`: Move the latest file from stash stack to working directory creating new branch named <name>, and then, remove the latest ID on stash stack.
+- `git stash branch <name>`: Move the latest file from stash stack to working directory creating new branch named `<name>`, and then, remove the latest ID on stash stack.
 
 #### 6. Methods of updating commit of log in local
 
